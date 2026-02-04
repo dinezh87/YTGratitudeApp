@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-main-deployment
+  labels:
+    component: server-main
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: server-main
+  template:
+    metadata:
+      labels:
+        component: server-main
+    spec:
+      containers:
+      - name: server-main
+        image: dinezh87/heroviredb14:server-main-v1
+        ports:
+        - containerPort: 5001
+        env:
+          - name: ENTRIES_SERVICE_ADDR
+            value: entries-cluster-ip-service:50051
+          - name: OPENAI_MODEL
+            value: gpt-4o-mini
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits: 
+            cpu: "500m"
+            memory: "512Mi"

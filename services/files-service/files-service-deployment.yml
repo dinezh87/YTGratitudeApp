@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: files-service-deployment
+  labels:
+    component: files-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: files-service
+  template:
+    metadata:
+      labels:
+        component: files-service
+    spec:
+      containers:
+      - name: files-service
+        image: dinezh87/heroviredb14:files-service-v1
+        ports:
+        - containerPort: 5004
+        env:
+          - name: S3_BUCKET
+            value: dinesh-b14-gratitude
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits: 
+            cpu: "500m"
+            memory: "512Mi"

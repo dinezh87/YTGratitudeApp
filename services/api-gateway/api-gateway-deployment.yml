@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+  labels:
+    component: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: api-gateway
+  template:
+    metadata:
+      labels:
+        component: api-gateway
+    spec:
+      containers:
+      - name: api-gateway
+        image: dinezh87/heroviredb14:api-gateway-v1
+        ports:
+        - containerPort: 5000
+        env:
+          - name: ENTRIES_SERVICE_ADDR
+            value: entries-cluster-ip-service:50051
+          - name: OPENAI_MODEL
+            value: gpt-4o-mini
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits: 
+            cpu: "500m"
+            memory: "512Mi"

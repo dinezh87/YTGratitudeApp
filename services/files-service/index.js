@@ -10,7 +10,7 @@ const {
 } = require("@aws-sdk/client-s3");
 
 const PORT = process.env.PORT || 5004;
-const REGION = process.env.AWS_REGION || "us-east-1";
+const REGION = process.env.AWS_REGION || "us-west-1";
 const BUCKET = process.env.S3_BUCKET || "";
 const PREFIX = (process.env.S3_PREFIX || "").replace(/\/+$/, "");
 const MAX_MB = Number(process.env.FILE_MAX_MB || 10);

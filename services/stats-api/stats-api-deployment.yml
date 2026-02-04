@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stats-api-deployment
+  labels:
+    component: stats-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: stats-api
+  template:
+    metadata:
+      labels:
+        component: stats-api
+    spec:
+      containers:
+      - name: stats-api
+        image: dinezh87/heroviredb14:stats-api-v1
+        ports:
+        - containerPort: 5003
+        env:
+          - name: ENTRIES_SERVICE_ADDR
+            value: entries-cluster-ip-service:50051
+          - name: OPENAI_MODEL
+            value: gpt-4o-mini
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits: 
+            cpu: "500m"
+            memory: "512Mi"
