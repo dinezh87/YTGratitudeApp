@@ -24,9 +24,24 @@ spec:
           volumeMounts:
             - name:  postgres-storage
               mountPath: /var/lib/postgresql
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: pgpassword
                   key: PGPASSWORD
+            - name: PGUSER
+              value: admin
+            - name: PGHOST
+              value: postgres
+            - name: PGDATABASE
+              value: myDB
+            - name: PGPORT
+              value: "5432"     
