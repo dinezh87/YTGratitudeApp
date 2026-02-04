@@ -20,20 +20,33 @@ spec:
         ports:
         - containerPort: 50053
         env:
-          - name: ENTRIES_SERVICE_ADDR
-            value: entries-cluster-ip-service:50051
-          - name: OPENAI_MODEL
-            value: gpt-4o-mini
           - name: PGUSER
-            value: 
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: PGUSER 
           - name: PGHOST
-            value:
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: PGHOST
           - name: PGDATABASE
-            value: mydb
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: PGDATABASE
           - name: PGPASSWORD
-            value:
+            valueFrom:
+              secretKeyRef:
+                name: gratitude-secret
+                key: PGPASSWORD
           - name: PGPORT
-            value: "5432"
+            valueFrom:  
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: PGPORT
+          - name: PORT
+            value: "50053"
         resources:
           requests:
             cpu: "200m"

@@ -21,7 +21,10 @@ spec:
         - containerPort: 5002
         env:
           - name: MOODS_SERVICE_ADDR
-            value: moods-service-cluster-ip-service:50052
+            valueFROM:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: MOODS_SERVICE_ADDR
           - name: PORT
             value: "5002"
         resources:

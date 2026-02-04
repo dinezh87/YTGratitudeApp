@@ -21,15 +21,24 @@ spec:
         - containerPort: 50051
         env:
           - name: PGUSER
-            value: admin
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: PGUSER
           - name: PGHOST
-            value: postgres
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: PGHOST
           - name: PGDATABASE
-            value: mydb
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: PGDATABASE
           - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: pgpassword
+                  name: gratitude-secrets
                   key: PGPASSWORD
           - name: PGPORT
             value: "5432"

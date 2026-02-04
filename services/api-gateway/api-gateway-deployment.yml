@@ -21,9 +21,15 @@ spec:
         - containerPort: 5000
         env:
           - name: ENTRIES_SERVICE_ADDR
-            value: entries-cluster-ip-service:50051
+            valueFrom: 
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: ENTRIES_SERVICE_ADDR
           - name: OPENAI_MODEL
-            value: gpt-4o-mini
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: OPENAI_MODEL
           - name: PORT
             value: "5000"
         resources:

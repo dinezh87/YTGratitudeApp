@@ -21,7 +21,10 @@ spec:
         - containerPort: 5003
         env:
           - name: STATS_SERVICE_ADDR
-            value: stats-service-cluster-ip-service:50053
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: STATS_SERVICE_ADDR
           - name: PORT
             value: "5003"
         resources:

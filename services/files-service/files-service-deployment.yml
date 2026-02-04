@@ -21,9 +21,15 @@ spec:
         - containerPort: 5004
         env:
           - name: S3_BUCKET
-            value: dinesh-b14-gratitude
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: S3_BUCKET
           - name: S3_PREFIX
-            value: 
+            valueFrom:
+              configMapKeyRef:
+                name: gratitude-configmap
+                key: S3_PREFIX
           - name: PORT
             value: "5004"
         resources:
