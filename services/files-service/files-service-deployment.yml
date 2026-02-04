@@ -22,6 +22,10 @@ spec:
         env:
           - name: S3_BUCKET
             value: dinesh-b14-gratitude
+          - name: S3_PREFIX
+            value: 
+          - name: PORT
+            value: "5004"
         resources:
           requests:
             cpu: "200m"

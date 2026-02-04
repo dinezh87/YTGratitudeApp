@@ -24,6 +24,16 @@ spec:
             value: entries-cluster-ip-service:50051
           - name: OPENAI_MODEL
             value: gpt-4o-mini
+          - name: PGUSER
+            value: 
+          - name: PGHOST
+            value:
+          - name: PGDATABASE
+            value: mydb
+          - name: PGPASSWORD
+            value:
+          - name: PGPORT
+            value: "5432"
         resources:
           requests:
             cpu: "200m"

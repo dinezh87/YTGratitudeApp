@@ -24,6 +24,8 @@ spec:
             value: entries-cluster-ip-service:50051
           - name: OPENAI_MODEL
             value: gpt-4o-mini
+          - name: PORT
+            value: "5000"
         resources:
           requests:
             cpu: "200m"

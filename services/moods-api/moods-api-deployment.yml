@@ -20,10 +20,10 @@ spec:
         ports:
         - containerPort: 5002
         env:
-          - name: ENTRIES_SERVICE_ADDR
-            value: entries-cluster-ip-service:50051
-          - name: OPENAI_MODEL
-            value: gpt-4o-mini
+          - name: MOODS_SERVICE_ADDR
+            value: moods-service-cluster-ip-service:50052
+          - name: PORT
+            value: "5002"
         resources:
           requests:
             cpu: "200m"

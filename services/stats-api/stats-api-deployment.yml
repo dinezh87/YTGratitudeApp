@@ -20,10 +20,10 @@ spec:
         ports:
         - containerPort: 5003
         env:
-          - name: ENTRIES_SERVICE_ADDR
-            value: entries-cluster-ip-service:50051
-          - name: OPENAI_MODEL
-            value: gpt-4o-mini
+          - name: STATS_SERVICE_ADDR
+            value: stats-service-cluster-ip-service:50053
+          - name: PORT
+            value: "5003"
         resources:
           requests:
             cpu: "200m"

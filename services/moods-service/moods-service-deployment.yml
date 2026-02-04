@@ -20,10 +20,19 @@ spec:
         ports:
         - containerPort: 50052
         env:
-          - name: ENTRIES_SERVICE_ADDR
-            value: entries-cluster-ip-service:50051
-          - name: OPENAI_MODEL
-            value: gpt-4o-mini
+          - name: PGUSER
+            value: admin
+          - name: PGHOST
+            value: postgres
+          - name: PGDATABASE
+            value: mydb
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD
+          - name: PGPORT
+            value: "5432"
         resources:
           requests:
             cpu: "200m"
