@@ -38,7 +38,7 @@ spec:
           - name: PGPASSWORD
             valueFrom:
               secretKeyRef:
-                name: gratitude-secret
+                name: gratitude-secrets
                 key: PGPASSWORD
           - name: PGPORT
             valueFrom:  

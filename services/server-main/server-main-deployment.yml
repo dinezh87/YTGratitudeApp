@@ -35,7 +35,7 @@ spec:
               configMapKeyRef:
                 name: gratitude-configmap
                 key: PGDATABASE
-          - name: POSTGRES_PASSWORD
+          - name: PGPASSWORD
             valueFrom:
                 secretKeyRef:
                   name: gratitude-secrets

@@ -21,7 +21,7 @@ spec:
         - containerPort: 5002
         env:
           - name: MOODS_SERVICE_ADDR
-            valueFROM:
+            valueFrom:
               configMapKeyRef:
                 name: gratitude-configmap
                 key: MOODS_SERVICE_ADDR

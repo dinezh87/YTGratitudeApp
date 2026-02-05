@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service
+spec:
+  type: NodePort         # Use NodePort for local Docker Desktop
+  selector:
+    component: web       # matches client deployment labels
+  ports:
+    - protocol: TCP
+      port: 80           # Service port
+      targetPort: 80     # Pod container port
+      nodePort: 30001    # Port to access from localhost
