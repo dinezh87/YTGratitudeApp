@@ -16,14 +16,41 @@ spec:
         - name: postgres-storage
           persistentVolumeClaim:
             claimName: database-persistent-vlc
+        - name: init-script
+          configMap:
+            name: db-init-script
+
       containers:
         - name: postgres
-          image: postgres:18 #need to check the image
+          image: postgres:16-alpine
           ports:
             - containerPort: 5432
+
           volumeMounts:
-            - name:  postgres-storage
-              mountPath: /var/lib/postgresql
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+            - name: init-script
+              mountPath: /docker-entrypoint-initdb.d
+
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: gratitude-configmap
+                  key: PGUSER
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gratitude-secrets
+                  key: PGPASSWORD
+
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: gratitude-configmap
+                  key: PGDATABASE
+
           resources:
             requests:
               memory: "256Mi"
@@ -31,17 +58,3 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
-          env:
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: pgpassword
-                  key: PGPASSWORD
-            - name: PGUSER
-              value: admin
-            - name: PGHOST
-              value: postgres
-            - name: PGDATABASE
-              value: myDB
-            - name: PGPORT
-              value: "5432"     
