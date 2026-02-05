@@ -145,3 +145,24 @@ The frontend calls `/api/...` paths. In development you need a reverse proxy tha
 - `/api/server/*` -> `http://localhost:5001/*`
 
 You can use a local reverse proxy (nginx, Caddy, or a small Express proxy) to do this. Without a proxy, update the client to call full URLs.
+
+Steps followed:
+  1. kubectl apply -f secrets.yml
+  2. kubectl apply -f configmap.yml
+  3. cd Database
+  4. dineshkumar@Dineshs-MacBook-Pro Database % ls -l
+     total 56
+     -rw-r--r--@ 1 dineshkumar  staff  1463  5 Feb 19:08 database-deployment-gpt.yml
+     -rw-r--r--@ 1 dineshkumar  staff  1675  4 Feb 16:54 database-deployment.yml
+     -rw-r--r--@ 1 dineshkumar  staff   206  4 Feb 07:39 database-persistent-vlc.yml
+     -rw-r--r--@ 1 dineshkumar  staff   259  4 Feb 07:39 database-pv.yml
+     -rw-r--r--@ 1 dineshkumar  staff   110  4 Feb 07:39 database-secret.yml
+     -rw-r--r--@ 1 dineshkumar  staff   178  4 Feb 07:39 database-service.yml
+     -rw-r--r--@ 1 dineshkumar  staff   149  5 Feb 19:00 init.sql
+  5. kubectl create configmap db-init-script --from-file=init.sql
+  6. kubectl apply -f database-pv.yml
+  7. kubectl apply -f database-persistent-vlc.yml
+  8. kubectl apply -f database-deployment.yml
+  9. cd ../services/entries-service
+  10. kubectl apply -f entries-service-deployment.yml
+  11. kubectl apply -f entries-service-service.yml
